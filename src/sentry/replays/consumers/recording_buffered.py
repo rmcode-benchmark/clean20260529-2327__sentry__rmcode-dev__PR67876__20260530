@@ -147,7 +147,6 @@ class InitialSegmentEvent(TypedDict):
     project_id: int
     received: int
     replay_id: str
-    is_replay_video: bool
 
 
 class RecordingBuffer:
@@ -266,7 +265,6 @@ def process_message(buffer: RecordingBuffer, message: bytes) -> None:
                 "project_id": decoded_message["project_id"],
                 "received": decoded_message["received"],
                 "replay_id": decoded_message["replay_id"],
-                "is_replay_video": decoded_message.get("replay_video") is not None,
             }
         )
 
@@ -363,7 +361,6 @@ def commit_initial_segments(initial_segment_events: list[InitialSegmentEvent]) -
             segment["replay_id"],
             segment["key_id"],
             segment["received"],
-            segment["is_replay_video"],
         )
 
 
